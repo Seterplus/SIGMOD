@@ -9,7 +9,7 @@ struct mmap_reader {
 	off_t size;
 	off_t off;
 	char *line;
-	mmap_reader(const char *path, off_t off) : off(off) {
+	mmap_reader(const char *path, off_t off = 0) : off(off) {
 		fd = open(path, O_RDONLY);
 		struct stat file;
 		fstat(fd, &file);
@@ -31,7 +31,7 @@ struct mmap_reader {
 			num = num * 10 + line[off++] - '0';
 		return true;
 	}
-	bool get_2_number(int &numa, int &numb) {
+	bool get_number(int &numa, int &numb) {
 		return get_number(numa) && get_number(numb);
 	}
 	void skip(off_t n) {
